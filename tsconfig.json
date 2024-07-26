@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "lib": ["ES2020", "DOM"],
+        "baseUrl": "./",
+        "paths": {
+            "@interfaces/*": ["src/interfaces/*"],
+            "@services/*": ["src/services/*"],
+            "@config": ["src/config"]
+        },
+        "resolveJsonModule": true,
+        "noEmitOnError": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true,
+        "useUnknownInCatchVariables": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}
