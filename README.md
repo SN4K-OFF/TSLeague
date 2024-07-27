@@ -36,7 +36,17 @@ Install TSLeague:
 npm install
 ```
 
-Enjoy 🎉
+Edit Proxies:
+
+-   Edit **src/proxy/ProxyManager.ts** to setup http proxies.
+
+Setup Steam API Key:
+
+-   Edit **src/steam/SteamAPI.ts** to setup your Steam API.
+
+_Steam API Key is required if you want to check steam accounts_
+
+Enjoy, everything is done 🎉
 
 **Supported operating systems**:
 
