@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
+        "target": "ES2023",
         "module": "commonjs",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "outDir": "./dist",
         "rootDir": "./src",
-        "lib": ["ES2020", "DOM"],
+        "lib": ["ES2023", "DOM"],
         "baseUrl": "./",
         "paths": {
             "@interfaces/*": ["src/interfaces/*"],

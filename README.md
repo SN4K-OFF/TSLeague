@@ -69,10 +69,11 @@ Here's a basic example of how to use the Rocket League API:
 
 ```typescript
 // Example for a specific season
-const api = new RocketLeagueAPI(
-    'https://api.tracker.gg/api/v2/rocket-league/standard/profile/epic/SomePlayer',
-    { season: Season.SEASON_28 },
-)
+const api = new RocketLeagueAPI({
+    season: Season.SEASON_28,
+    accountType: AccountType.EPIC,
+    username: 'SomePlayer',
+})
 
 async function getSeasonStats() {
     const data = await api.fetchData()
@@ -104,9 +105,10 @@ async function getSeasonStats() {
 
 ```typescript
 // Example for the current season
-const api = new RocketLeagueAPI(
-    'https://api.tracker.gg/api/v2/rocket-league/standard/profile/epic/SomePlayer',
-)
+const api = new RocketLeagueAPI({
+    accountType: AccountType.EPIC,
+    username: 'SomePlayer',
+})
 
 async function getCurrentSeasonStats() {
     const data = await api.fetchData()
@@ -140,9 +142,10 @@ _Warning: use current season for fetch global stats_
 
 ```typescript
 // Example for the global stats
-const api = new RocketLeagueAPI(
-    'https://api.tracker.gg/api/v2/rocket-league/standard/profile/epic/SomePlayer',
-)
+const api = new RocketLeagueAPI({
+    accountType: AccountType.EPIC,
+    username: 'SomePlayer',
+})
 
 async function getGlobalStats() {
     const data = await api.fetchData()

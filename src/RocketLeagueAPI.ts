@@ -2,24 +2,32 @@ import puppeteer from 'puppeteer-extra'
 import StealthPlugin from 'puppeteer-extra-plugin-stealth'
 
 import { createLogger } from './utils/Logger'
+
 import { RocketLeagueData } from './interfaces/RocketLeagueData'
 import { RocketLeagueAPIOptions } from './interfaces/RocketLeagueAPIOptions'
 import { Playlist, PlaylistIdMap } from './enum/Playlist'
 import { ProxyManager } from './proxy/ProxyManager'
 import { OverviewStats } from './object/OverviewStats'
 import { PlaylistStats } from './object/PlaylistStats'
+import { AccountType } from './enum/AccountType'
+import { SteamAPI } from './steam/SteamAPI'
 
 puppeteer.use(StealthPlugin())
 const logger = createLogger()
 
 export class RocketLeagueAPI {
     private proxyManager = new ProxyManager()
+    private url: string = 'https://api.tracker.gg/api/v2/rocket-league/standard/profile'
     private data: RocketLeagueData | null = null
 
-    constructor(
-        private url: string,
-        options: RocketLeagueAPIOptions = {},
-    ) {
+    constructor(private options: RocketLeagueAPIOptions) {
+        if (this.options.accountType === AccountType.STEAM) {
+            const steamAPI = new SteamAPI(this.options.username)
+            const steamId = steamAPI.getSteamID()
+            this.url += `/steam/${steamId}`
+        } else if (this.options.accountType === AccountType.EPIC)
+            this.url += `/epic/${this.options.username}`
+
         if (options.season) this.url += `/segments/playlist?season=${options.season}`
     }
 
@@ -45,7 +53,6 @@ export class RocketLeagueAPI {
 
         try {
             const page = await browser.newPage()
-            logger.info(`Browsing: ${this.url}`)
 
             const response = await page.goto(`${this.url}`, {
                 waitUntil: 'domcontentloaded',
